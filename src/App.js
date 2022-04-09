@@ -7,13 +7,15 @@ import {
   CheckoutPage,
   ErrorPage,
   HomePage,
+  PrivateRoute,
   ProductsPage,
   SingleProductPage,
+  AuthWrapper,
 } from "./pages";
 
 function App() {
   return (
-    <h4>
+    <AuthWrapper>
       <Router>
         <Navbar />
         <Sidebar />
@@ -34,16 +36,16 @@ function App() {
             <ProductsPage />
           </Route>
           <Route exact path="/products/:id" children={<SingleProductPage />} />
-          <Route exact path="/checkout">
+          <PrivateRoute exact path="/checkout">
             <CheckoutPage />
-          </Route>
+          </PrivateRoute>
           <Route path="*">
             <ErrorPage />
           </Route>
         </Switch>
         <Footer />
       </Router>
-    </h4>
+    </AuthWrapper>
   );
 }
 

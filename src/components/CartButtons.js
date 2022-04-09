@@ -5,9 +5,12 @@ import styled from "styled-components";
 import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
+import { CLEAR_CART } from "../actions";
 
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
+  const { totalItems, clearCart } = useCartContext();
+  const { loginWithRedirect, logout, myUser } = useUserContext();
 
   return (
     <Wrapper className="cart-btn-wrapper">
@@ -15,13 +18,27 @@ const CartButtons = () => {
         Cart
         <span className="cart-container">
           <FaShoppingCart />
-          <span className="cart-value">12</span>
+          <span className="cart-value">{totalItems}</span>
         </span>
       </Link>
-      <button type="button" className="auth-btn">
-        Login
-        <FaUserPlus />
-      </button>
+      {myUser ? (
+        <button
+          type="button"
+          className="auth-btn"
+          onClick={() => {
+            clearCart();
+            logout({ returnTo: window.location.origin });
+          }}
+        >
+          Logout
+          <FaUserMinus />
+        </button>
+      ) : (
+        <button type="button" className="auth-btn" onClick={loginWithRedirect}>
+          Login
+          <FaUserPlus />
+        </button>
+      )}
     </Wrapper>
   );
 };

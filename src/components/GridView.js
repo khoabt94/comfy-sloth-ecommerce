@@ -1,10 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
-import Product from './Product'
+import React from "react";
+import styled from "styled-components";
+import Product from "./Product";
 
-const GridView = () => {
-  return <h4>Grid View</h4>
-}
+const GridView = ({ products }) => {
+  return (
+    <Wrapper>
+      <div className="products-container">
+        {products.map((product) => {
+          return <Product key={product.id} item={product} />;
+        })}
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   img {
@@ -14,9 +22,10 @@ const Wrapper = styled.section`
   .products-container {
     display: grid;
     gap: 2rem 1.5rem;
+    text-transform: capitalize;
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: 850px) {
     .products-container {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -26,6 +35,6 @@ const Wrapper = styled.section`
       grid-template-columns: repeat(3, 1fr);
     }
   }
-`
+`;
 
-export default GridView
+export default GridView;

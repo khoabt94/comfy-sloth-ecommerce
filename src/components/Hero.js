@@ -37,6 +37,10 @@ const Wrapper = styled.section`
     display: none;
   }
 
+  h1 {
+    line-height: 1.2;
+  }
+
   p {
     line-height: 2;
     max-width: 45em;
